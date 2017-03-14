@@ -1,0 +1,13 @@
+name = VBO export
+description = Adds a VBO operations to output view results as csv and xlsx.
+core = 7.x
+dependencies[] = views_bulk_operations
+dependencies[] = file
+package = Views
+
+; Information added by Drupal.org packaging script on 2017-02-10
+version = "7.x-1.x-dev"
+core = "7.x"
+project = "vbo_export"
+datestamp = "1486715885"
+

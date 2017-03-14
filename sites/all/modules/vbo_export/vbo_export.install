@@ -1,0 +1,43 @@
+<?php
+
+/**
+ * @file
+ * Module install procedures.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function vbo_export_install() {
+  $dir = file_default_scheme() . '://vbo_export';
+  file_prepare_directory($dir, FILE_CREATE_DIRECTORY);
+}
+
+/**
+ * Implements hook_requirements().
+ */
+function vbo_export_requirements($phase) {
+  $requirements = array();
+  $t = get_t();
+  if ($phase == 'runtime') {
+    // Try to detect PHPExcel library.
+    $library = libraries_detect('PHPExcel');
+    if (($library = libraries_detect('PHPExcel')) && !empty($library['installed'])) {
+      $requirements['PHPExcel'] = array(
+        'title' => $t('PHPExcel library'),
+        'value' => $library['version'],
+        'severity' => REQUIREMENT_OK,
+      );
+    }
+    else {
+      $requirements['PHPExcel'] = array(
+        'title' => $t('PHPExcel library'),
+        'value' => $t('Not found'),
+        'description' => $t('In order to use vbo_export xlsx functionality you need to install the PHPExcel library.'),
+        'severity' => REQUIREMENT_ERROR,
+      );
+    }
+  }
+
+  return $requirements;
+}
