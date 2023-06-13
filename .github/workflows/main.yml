@@ -2,7 +2,7 @@ name: Deploy to AWS EKS
 on:
   workflow_dispatch:
   push:
-    branches: [ main ]
+    branches: [ master ]
 jobs:  
   build:
     name: Build Image
